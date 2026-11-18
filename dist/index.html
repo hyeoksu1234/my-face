@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#101613">
+  <meta name="description" content="My FACE는 Mac 카메라로 등록한 얼굴을 확인해 잠금 해제를 돕는 앱입니다. 잠금 해제 모션을 체험하고 설치 방법을 확인하세요.">
+  <title>My FACE — 바라보면, Mac이 열려요</title>
+  <link rel="icon" href="./assets/brand-mark.webp" type="image/webp">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 이동</a>
+  <header class="site-header">
+    <div class="container navigation">
+      <a class="brand" href="#main" aria-label="My FACE 홈">
+        <span class="brand-icon"><img src="./assets/brand-mark.webp" width="40" height="40" alt=""></span>
+        <span>My FACE</span>
+      </a>
+      <nav aria-label="메인 메뉴">
+        <a href="#experience">동작 체험</a>
+        <a href="#privacy">개인정보</a>
+        <a class="nav-download" href="#download">다운로드 <span aria-hidden="true">↘</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="overline"><span class="signal-dot" aria-hidden="true"></span> Mac용 얼굴 잠금 해제</p>
+        <h1 id="hero-title">바라보면,<br><em>Mac이 열려요.</em></h1>
+        <p class="hero-description">Mac을 깨우고 카메라를 바라보세요. My FACE가 등록한 얼굴을 확인하고 잠금 해제를 도와줘요.</p>
+        <div class="actions">
+          <a class="button button-primary" href="#download"><span class="download-icon" aria-hidden="true"></span> Mac용 다운로드</a>
+          <button class="button button-quiet" id="play-hero" type="button" hidden><span class="play-icon" aria-hidden="true"></span> 모션 재생</button>
+        </div>
+        <p class="requirements">macOS 26 이상 <span aria-hidden="true">·</span> 카메라 및 Secure Enclave 필요</p>
+      </div>
+
+      <figure class="hero-demo" id="hero-demo" data-phase="locked">
+        <div class="screen-angle">
+          <div class="screen-frame">
+            <div class="screen">
+              <div class="camera-housing" aria-hidden="true"><i></i></div>
+              <div class="notch-panel" aria-hidden="true">
+                <canvas class="hero-mark" id="hero-mark" width="128" height="128"></canvas>
+                <span class="panel-text" id="panel-text">잠금 상태</span>
+              </div>
+              <div class="lock-clock" aria-hidden="true">
+                <span>11월 18일 수요일</span>
+                <strong>9:41</strong>
+              </div>
+              <div class="screen-bottom" aria-hidden="true"><span class="small-lock"></span><span>My FACE</span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <span><span class="signal-dot" aria-hidden="true"></span> 잠금 화면 데모</span>
+          <span>카메라 사용 없음</span>
+        </figcaption>
+        <p id="hero-status" class="visually-hidden" role="status"></p>
+      </figure>
+    </section>
+
+    <section class="experience section" id="experience" aria-labelledby="experience-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="overline">잠금 해제 모션</p>
+          <h2 id="experience-title">한 번의 확인, 세 장면.</h2>
+          <p>단계를 선택하거나 아래 재생 막대를 움직여 보세요.</p>
+        </div>
+        <div class="experience-layout">
+          <div class="step-list reveal">
+            <ol aria-label="잠금 해제 단계">
+              <li><button class="step" disabled data-time="0" type="button" aria-pressed="true">
+                <span class="step-number">01</span>
+                <span><strong>잠금 상태</strong><span>닫힌 자물쇠가 나타나요.</span></span>
+                <span class="step-arrow" aria-hidden="true">↗</span>
+              </button></li>
+              <li><button class="step" disabled data-time="0.72" type="button" aria-pressed="false">
+                <span class="step-number">02</span>
+                <span><strong>얼굴 확인 중</strong><span>회전하는 링이 확인 상태를 보여줘요.</span></span>
+                <span class="step-arrow" aria-hidden="true">↗</span>
+              </button></li>
+              <li><button class="step" disabled data-time="1.2" type="button" aria-pressed="false">
+                <span class="step-number">03</span>
+                <span><strong>잠금 해제</strong><span>확인이 끝나면 체크가 그려져요.</span></span>
+                <span class="step-arrow" aria-hidden="true">↗</span>
+              </button></li>
+            </ol>
+          </div>
+          <div class="motion-studio reveal">
+            <div class="motion-viz">
+              <span class="studio-label"><span class="signal-dot" aria-hidden="true"></span> <span id="studio-phase">잠금 상태</span></span>
+              <div class="study-mark"><canvas id="study-mark" width="256" height="256" aria-hidden="true"></canvas></div>
+            </div>
+            <div class="timeline">
+              <button class="icon-button" id="play-study" type="button" disabled aria-label="전체 모션 재생" title="전체 모션 재생"><span class="play-icon" aria-hidden="true"></span></button>
+              <label class="visually-hidden" for="motion-time">모션 재생 위치</label>
+              <input id="motion-time" type="range" disabled min="0" max="2" step="0.01" value="0" aria-valuetext="0초, 잠금 상태">
+              <output id="time-readout" for="motion-time" aria-live="off">0.00 / 2.00초</output>
+            </div>
+            <noscript><p class="no-script">모션을 체험하려면 JavaScript를 켜주세요.</p></noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy section container" id="privacy" aria-labelledby="privacy-title">
+      <div class="privacy-copy reveal">
+        <p class="overline">개인정보</p>
+        <h2 id="privacy-title">얼굴 정보는<br>이 Mac 안에.</h2>
+        <p>얼굴 확인은 Mac에서 처리해요. 등록한 얼굴 정보와 잠금 해제에 쓰는 암호는 암호화해 이 기기에 보관합니다.</p>
+      </div>
+      <dl class="privacy-list reveal">
+        <div><dt>기기 내 얼굴 확인</dt><dd>네트워크 연결 없이 등록한 얼굴을 확인해요.</dd></div>
+        <div><dt>직접 켜는 잠금 해제</dt><dd>얼굴을 등록하고 인식 테스트를 마친 뒤 자동 잠금 해제를 켤 수 있어요.</dd></div>
+        <div><dt>평소 쓰던 인증 방법</dt><dd>Mac 암호와 Touch ID는 계속 사용할 수 있어요.</dd></div>
+      </dl>
+    </section>
+
+    <section class="download section" id="download" aria-labelledby="download-title">
+      <div class="container download-layout">
+        <div class="download-copy reveal">
+          <p class="overline">다운로드</p>
+          <h2 id="download-title">Mac에 My FACE 설치하기</h2>
+          <p>카메라가 있고 Secure Enclave를 지원하는 macOS 26 이상 Mac이 필요해요.</p>
+          <ol class="install-steps">
+            <li>받은 ZIP을 풀고 My FACE를 응용 프로그램 폴더로 옮겨요.</li>
+            <li>앱을 열고 카메라와 손쉬운 사용 권한을 설정해요.</li>
+            <li>얼굴을 등록한 뒤 <strong>얼굴 인식 테스트</strong>로 먼저 확인해요.</li>
+          </ol>
+        </div>
+        <div class="release-card reveal">
+          <div class="release-top">
+            <span class="brand-icon brand-large"><img src="./assets/brand-mark.webp" width="68" height="68" alt=""></span>
+            <span class="release-state" id="release-state">배포 준비 중</span>
+          </div>
+          <h3>My FACE for Mac</h3>
+          <p class="release-version" id="release-version">v0.1.13 · macOS 26+</p>
+          <a class="button button-primary" id="release-download" href="https://github.com/hyeoksu1234/my-face/releases"><span class="download-icon" aria-hidden="true"></span><span id="release-action">GitHub Releases 보기</span></a>
+          <p class="release-note" id="release-note">Apple 공증이 완료되면 이곳에서 설치 파일을 받을 수 있어요.</p>
+          <details id="checksum" hidden><summary>파일 검증 정보</summary><code id="hash"></code></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section container" aria-labelledby="faq-title">
+      <div class="section-heading reveal">
+        <p class="overline">설치 전 확인</p>
+        <h2 id="faq-title">자주 묻는 질문</h2>
+      </div>
+      <div class="questions reveal">
+        <details><summary>Mac 암호가 왜 필요한가요?</summary><p>얼굴을 확인하면 My FACE가 macOS 잠금 화면에 저장된 Mac 암호를 입력해요. 앱 설정에서 저장한 암호를 지울 수 있어요.</p></details>
+        <details><summary>사진이나 영상으로도 잠금이 풀릴 수 있나요?</summary><p>사진과 화면 감지, 선택한 추가 동작으로 위험을 줄여요. 일반 카메라를 사용하기 때문에 사진이나 영상으로 인증이 통과할 가능성이 있어요.</p></details>
+        <details><summary>얼굴이 인식되지 않으면 어떻게 하나요?</summary><p>평소처럼 Mac 암호 또는 Touch ID로 잠금을 해제하세요. 앱의 얼굴 인식 테스트에서 얼굴 위치와 조명을 확인할 수 있어요.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#main"><span class="brand-icon"><img src="./assets/brand-mark.webp" width="40" height="40" alt=""></span><span>My FACE</span></a>
+      <div class="footer-links">
+        <a href="https://github.com/hyeoksu1234/my-face">GitHub</a>
+        <a href="./credits.html">라이선스 및 기여자</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
