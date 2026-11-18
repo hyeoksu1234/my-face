@@ -16,6 +16,38 @@ function enableScrollReveal() {
   sections.forEach(section => observer.observe(section));
 }
 
+function trackScrollStory() {
+  const story = document.querySelector(".scroll-story");
+  const phrases = [...story.querySelectorAll("h2 span")];
+  let scheduled = 0;
+  function update() {
+    scheduled = 0;
+    const bounds = story.getBoundingClientRect();
+    const start = innerHeight * 0.67;
+    const travel = Math.max(1, bounds.height - innerHeight * 0.8);
+    const progress = Math.min(1, Math.max(0, (start - bounds.top) / travel));
+    const current = Math.min(phrases.length - 1, Math.floor(progress * phrases.length));
+    phrases.forEach((phrase, index) => {
+      phrase.classList.toggle("is-read", index < current);
+      phrase.classList.toggle("is-current", index === current);
+    });
+  }
+  function schedule() {
+    if (!scheduled) scheduled = requestAnimationFrame(update);
+  }
+  function applyPreference() {
+    story.classList.toggle("is-tracked", !motionPreference.matches);
+    window.removeEventListener("scroll", schedule);
+    window.removeEventListener("resize", schedule);
+    if (motionPreference.matches) return;
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+  }
+  applyPreference();
+  motionPreference.addEventListener("change", applyPreference);
+}
+
 function setUpTilt(figure) {
   const angle = figure.querySelector(".screen-angle");
   let nextFrame = 0;
@@ -204,6 +236,7 @@ async function loadRelease() {
   const download = new URL(release.downloadUrl, location.href);
   if (download.protocol !== "https:" || download.hostname !== "github.com") return;
   byId("release-download").href = download.href;
+  byId("hero-download").href = download.href;
   byId("release-action").textContent = "Mac용 ZIP 다운로드";
   byId("release-state").textContent = "다운로드 가능";
   byId("release-note").textContent = "ZIP 파일을 받은 뒤 설치 안내를 따라 진행하세요.";
@@ -214,6 +247,7 @@ async function loadRelease() {
 }
 
 enableScrollReveal();
+trackScrollStory();
 loadMotion().catch(() => {
   document.documentElement.classList.add("motion-unavailable");
   byId("studio-phase").textContent = "모션을 불러오지 못했어요";

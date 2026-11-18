@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#101613">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f5f7f3">
   <meta name="description" content="My FACE는 Mac 카메라로 등록한 얼굴을 확인해 잠금 해제를 돕는 앱입니다. 잠금 해제 모션을 체험하고 설치 방법을 확인하세요.">
   <title>My FACE — 바라보면, Mac이 열려요</title>
   <link rel="icon" href="./assets/brand-mark.webp" type="image/webp">
@@ -20,7 +20,8 @@
         <span>My FACE</span>
       </a>
       <nav aria-label="메인 메뉴">
-        <a href="#experience">동작 체험</a>
+        <a href="#experience">작동 방식</a>
+        <a href="#setup">설치 방법</a>
         <a href="#privacy">개인정보</a>
         <a class="nav-download" href="#download">다운로드 <span aria-hidden="true">↘</span></a>
       </nav>
@@ -30,12 +31,11 @@
   <main id="main">
     <section class="hero container" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="overline"><span class="signal-dot" aria-hidden="true"></span> Mac용 얼굴 잠금 해제</p>
         <h1 id="hero-title">바라보면,<br><em>Mac이 열려요.</em></h1>
         <p class="hero-description">Mac을 깨우고 카메라를 바라보세요. My FACE가 등록한 얼굴을 확인하고 잠금 해제를 도와줘요.</p>
         <div class="actions">
-          <a class="button button-primary" href="#download"><span class="download-icon" aria-hidden="true"></span> Mac용 다운로드</a>
-          <button class="button button-quiet" id="play-hero" type="button" hidden><span class="play-icon" aria-hidden="true"></span> 모션 재생</button>
+          <a class="button button-primary" id="hero-download" href="#download"><span class="download-icon" aria-hidden="true"></span> Mac용 다운로드</a>
+          <a class="button button-quiet" href="https://github.com/hyeoksu1234/my-face">GitHub <span aria-hidden="true">↗</span></a>
         </div>
         <p class="requirements">macOS 26 이상 <span aria-hidden="true">·</span> 카메라 및 Secure Enclave 필요</p>
       </div>
@@ -58,11 +58,18 @@
           </div>
         </div>
         <figcaption>
-          <span><span class="signal-dot" aria-hidden="true"></span> 잠금 화면 데모</span>
-          <span>카메라 사용 없음</span>
+          <span><span class="signal-dot" aria-hidden="true"></span> 잠금 화면 데모 · 카메라 사용 없음</span>
+          <button class="demo-replay" id="play-hero" type="button" hidden><span class="play-icon" aria-hidden="true"></span> 다시 재생</button>
         </figcaption>
         <p id="hero-status" class="visually-hidden" role="status"></p>
       </figure>
+    </section>
+
+    <section class="scroll-story" aria-labelledby="story-title">
+      <div class="story-stage container">
+        <h2 id="story-title"><span>화면을 깨우고,</span> <span>카메라를 바라보세요.</span> <span>등록한 얼굴이 확인되면</span> <span>Mac이 열려요.</span></h2>
+        <p>평소 쓰던 Mac 암호와 Touch ID도 계속 사용할 수 있어요.</p>
+      </div>
     </section>
 
     <section class="experience section" id="experience" aria-labelledby="experience-title">
@@ -109,6 +116,18 @@
       </div>
     </section>
 
+    <section class="setup section container" id="setup" aria-labelledby="setup-title">
+      <div class="section-heading reveal">
+        <p class="overline">처음 사용하기</p>
+        <h2 id="setup-title">잠금 해제 켜기</h2>
+      </div>
+      <ol class="setup-steps reveal">
+        <li><strong>얼굴 등록</strong><p>앱에서 카메라 접근을 허용하고 안내에 따라 얼굴을 등록해요.</p></li>
+        <li><strong>인식 테스트</strong><p>설정의 얼굴 인식 테스트에서 Mac이 내 얼굴을 확인하는지 살펴봐요.</p></li>
+        <li><strong>잠금 해제 활성화</strong><p>Mac 암호를 저장하고 준비됐을 때 자동 잠금 해제를 켜요.</p></li>
+      </ol>
+    </section>
+
     <section class="privacy section container" id="privacy" aria-labelledby="privacy-title">
       <div class="privacy-copy reveal">
         <p class="overline">개인정보</p>
@@ -117,8 +136,8 @@
       </div>
       <dl class="privacy-list reveal">
         <div><dt>기기 내 얼굴 확인</dt><dd>네트워크 연결 없이 등록한 얼굴을 확인해요.</dd></div>
-        <div><dt>직접 켜는 잠금 해제</dt><dd>얼굴을 등록하고 인식 테스트를 마친 뒤 자동 잠금 해제를 켤 수 있어요.</dd></div>
-        <div><dt>평소 쓰던 인증 방법</dt><dd>Mac 암호와 Touch ID는 계속 사용할 수 있어요.</dd></div>
+        <div><dt>추가 확인 동작</dt><dd>설정에서 얼굴 확인에 고개 움직임이나 눈 깜빡임을 추가할 수 있어요.</dd></div>
+        <div><dt>저장한 데이터 관리</dt><dd>필요할 때 등록한 얼굴과 저장한 암호를 앱 설정에서 지울 수 있어요.</dd></div>
       </dl>
     </section>
 
