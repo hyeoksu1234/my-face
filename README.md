@@ -22,3 +22,10 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 
 `downloadUrl`이 비어 있으면 사이트는 배포 준비 상태와 Releases 페이지를
 안내합니다. `dist/credits.html`에서 모션의 출처와 라이선스를 볼 수 있습니다.
+
+## 배경 이미지
+
+노치 데모 배경은 내장 ImageGen으로 제작했으며
+[`dist/assets/ridge-wallpaper.webp`](dist/assets/ridge-wallpaper.webp)에 있습니다.
+
+> Create a 16:9 photorealistic desktop lock screen wallpaper for the My FACE macOS app website. Aerial long-lens landscape looking over tightly layered deep pine-green mountain ridges at blue hour; deep charcoal teal and gradated mist, a little pale jade light above the crests at the far right. Quiet fine-grained cinematic landscape photograph, large smooth dark negative space and a soft muted blue-green sky across the upper half so a white clock can sit in the centered upper third. Ridges and fog mainly in lower half, layered silhouettes with real natural texture, wide composition. Restrained saturation, no people, no device, no typography, no logos, no UI. Wallpaper only.
